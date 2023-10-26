@@ -4,9 +4,9 @@ data class Project(val id: Int,
                    var title: String,
                    var description: String,
                    var authors: List<String> = listOf("Shanghua Yang"),
-                   var link: String = "",
+                   var link: String = "www.google.com",
                    var isFavorite: Boolean = false,
-                   var keywords: Set<String> = setOf()
+                   var keywords: Set<String> = setOf("weather, forecast")
    ){
     companion object {
         val project = Project(0, "Weather Forecast", "Weather Forcast is an app ...")

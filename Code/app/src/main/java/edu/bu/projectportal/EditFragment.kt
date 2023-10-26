@@ -15,6 +15,9 @@ class EditFragment : Fragment() {
 
     private lateinit var projTitle: EditText
     private lateinit var projDesc: EditText
+    private lateinit var projAuthors: EditText
+    private lateinit var projLink: EditText
+    private lateinit var projKeywords: EditText
     private lateinit var submit:Button
     private lateinit var cancel:Button
 
@@ -31,17 +34,25 @@ class EditFragment : Fragment() {
 
         projTitle = view.findViewById(R.id.projTitleEdit)
         projDesc =  view.findViewById(R.id.projDescEdit)
+        projAuthors = view.findViewById(R.id.projAuthorsEdit)
+        projLink = view.findViewById(R.id.projLinkEdit)
+        projKeywords = view.findViewById(R.id.projKeywordsEdit)
 
         submit = view.findViewById<Button>(R.id.submit)
         cancel = view.findViewById<Button>(R.id.cancel)
 
         projTitle.setText(Project.project.title)
         projDesc.setText(Project.project.description)
-
+        projAuthors.setText(Project.project.authors.joinToString(separator = ", "))
+        projLink.setText(Project.project.link)
+        projKeywords.setText(Project.project.keywords.joinToString(separator = ", "))
 
         submit.setOnClickListener {
             Project.project.title = projTitle.text.toString()
             Project.project.description = projDesc.text.toString()
+            Project.project.authors = projAuthors.text.split(",").map { it.trim() }
+            Project.project.link = projLink.text.toString()
+            Project.project.keywords = projKeywords.text.split(",").map { it.trim() }.toSet()
             view.findNavController().
             navigate(R.id.action_editFragment_pop)
         }
